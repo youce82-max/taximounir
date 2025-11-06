@@ -2,36 +2,645 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Taxi Mounir</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="Taxi Mounir - Service de transport médicalisé à Soissons et alentours. Transport assis, conventionné sécurité sociale." />
+<title>Taxi Mounir - Transport médicalisé à Soissons</title>
+<style>
+  :root {
+    --primary: #FFD700;
+    --secondary: #000;
+    --accent: #333;
+    --light: #f8f8f8;
+    --text: #222;
+    --shadow: 0 3px 6px rgba(0,0,0,0.2);
+    --transition: all 0.3s ease;
+  }
+  
+  * {
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0; 
+    padding: 0;
+    background: #fff;
+    color: var(--text);
+    line-height: 1.6;
+  }
+  
+  header {
+    background: var(--primary);
+    color: var(--secondary);
+    padding: 20px;
+    text-align: center;
+    box-shadow: var(--shadow);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  header::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, transparent 70%, rgba(255,255,255,0.3) 100%);
+    z-index: 1;
+  }
+  
+  .header-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+  }
+  
+  .phone-reminder {
+    background: var(--secondary);
+    color: var(--primary);
+    padding: 8px 15px;
+    border-radius: 20px;
+    margin-top: 10px;
+    font-weight: bold;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    animation: pulse 2s infinite;
+  }
+  
+  header h1 {
+    margin: 0;
+    font-size: 2.5em;
+    letter-spacing: 2px;
+    animation: fadeIn 1s ease-out;
+  }
+  
+  header p {
+    margin: 5px 0 0 0;
+    font-style: italic;
+    font-weight: bold;
+    animation: fadeIn 1.5s ease-out;
+  }
+  
+  main {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
+    text-align: center;
+  }
+  
+  .hero-image {
+    width: 100%;
+    max-width: 400px;
+    height: 200px;
+    background: var(--light);
+    border-radius: 8px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .hero-image::before {
+    content: "🚕";
+    font-size: 4rem;
+    position: absolute;
+    opacity: 0.7;
+  }
+  
+  .hero-text h2 {
+    color: var(--secondary);
+    margin-bottom: 10px;
+    font-size: 1.8em;
+  }
+  
+  .hero-text p {
+    font-size: 1.1em;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  section.services {
+    margin: 40px 0;
+    padding: 20px;
+    background: var(--light);
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+  }
+  
+  section.services h2 {
+    color: var(--secondary);
+    text-align: center;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    position: relative;
+    padding-bottom: 10px;
+  }
+  
+  section.services h2::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background: var(--primary);
+  }
+  
+  .service-area {
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 20px;
+    font-size: 1.2em;
+  }
+  
+  ul.services-list {
+    list-style: none;
+    padding: 0;
+    max-width: 600px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+  }
+  
+  ul.services-list li {
+    background: var(--secondary);
+    color: var(--primary);
+    margin: 0;
+    padding: 15px;
+    border-radius: 4px;
+    font-weight: bold;
+    text-align: center;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  ul.services-list li:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  }
+  
+  .buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    margin: 40px 0;
+  }
+  
+  .btn {
+    background: var(--secondary);
+    color: var(--primary);
+    text-decoration: none;
+    padding: 15px 20px;
+    font-weight: bold;
+    border-radius: 6px;
+    box-shadow: var(--shadow);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: var(--transition);
+    min-width: 200px;
+    justify-content: center;
+  }
+  
+  .btn:hover {
+    background: var(--accent);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  }
+  
+  .reservation {
+    margin: 40px 0;
+    padding: 30px;
+    background: var(--light);
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+  }
+  
+  .reservation h2 {
+    color: var(--secondary);
+    text-align: center;
+    margin-bottom: 20px;
+    position: relative;
+    padding-bottom: 10px;
+  }
+  
+  .reservation h2::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background: var(--primary);
+  }
+  
+  .reservation-form {
+    max-width: 600px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form-group label {
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1em;
+  }
+  
+  .form-group textarea {
+    min-height: 100px;
+    resize: vertical;
+  }
+  
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+  }
+  
+  .btn-submit {
+    background: var(--secondary);
+    color: var(--primary);
+    border: none;
+    padding: 15px;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: var(--transition);
+    font-size: 1.1em;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  
+  .btn-submit:hover {
+    background: var(--accent);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  }
+  
+  .testimonials {
+    margin: 40px 0;
+    padding: 20px;
+    background: var(--light);
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+  }
+  
+  .testimonials h2 {
+    color: var(--secondary);
+    text-align: center;
+    margin-bottom: 20px;
+    position: relative;
+    padding-bottom: 10px;
+  }
+  
+  .testimonials h2::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background: var(--primary);
+  }
+  
+  .testimonial-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+  }
+  
+  .testimonial {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    max-width: 300px;
+    flex: 1 1 250px;
+    transition: var(--transition);
+  }
+  
+  .testimonial:hover {
+    transform: translateY(-5px);
+  }
+  
+  .testimonial p {
+    font-style: italic;
+    margin-bottom: 15px;
+  }
+  
+  .testimonial .author {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .testimonial .stars {
+    color: var(--primary);
+    margin-top: 5px;
+  }
+  
+  footer {
+    text-align: center;
+    font-size: 0.9em;
+    margin: 40px 0 20px 0;
+    color: #555;
+    padding: 20px;
+    background: var(--light);
+    border-top: 3px solid var(--primary);
+  }
+  
+  .footer-phone {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin: 10px 0;
+    color: var(--secondary);
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  @keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+  }
+  
+  @media (max-width: 768px) {
+    header h1 {
+      font-size: 2em;
+    }
+    
+    .hero-text h2 {
+      font-size: 1.5em;
+    }
+    
+    .btn {
+      flex: 1 1 100%;
+    }
+    
+    ul.services-list {
+      grid-template-columns: 1fr;
+    }
+    
+    .form-row {
+      grid-template-columns: 1fr;
+    }
+    
+    .reservation {
+      padding: 20px 15px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    header h1 {
+      font-size: 1.8em;
+    }
+    
+    main {
+      padding: 15px;
+    }
+    
+    section.services, .testimonials {
+      padding: 15px;
+    }
+  }
+</style>
 </head>
 <body>
-    <header>
-        <h1>🚖 Taxi Mounir</h1>
-        <nav>
-            <a href="index.html">Accueil</a>
-            <a href="tarifs.html">Tarifs</a>
-            <a href="contact.html">Contact</a>
-        </nav>
-    </header>
 
-    <main>
-        <section class="hero">
-            <h2>Votre chauffeur de confiance</h2>
-            <p>Disponible 24h/24 et 7j/7 - Réservez dès maintenant</p>
-            <a href="tel:+33600000000" class="btn">📞 Appeler maintenant</a>
-        </section>
+<header>
+  <div class="header-content">
+    <h1>Taxi Mounir</h1>
+    <p>Des trajets agréables, un chauffeur serviable</p>
+    <div class="phone-reminder">
+      📞 <a href="tel:+33663212046" style="color: #FFD700; text-decoration: none;">06 63 21 20 46</a>
+    </div>
+  </div>
+</header>
 
-        <section class="map">
-            <h3>📍 Nous trouver</h3>
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2624.999!" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-        </section>
-    </main>
+<main>
+  <section class="hero">
+    <div class="hero-image"></div>
+    <div class="hero-text">
+      <h2>Service de transport médicalisé de confiance</h2>
+      <p>À votre service à Soissons et ses environs pour tous vos déplacements, en particulier vos rendez-vous médicaux.</p>
+    </div>
+  </section>
 
-    <footer>
-        <p>© 2025 Taxi Mounir - Tous droits réservés</p>
-    </footer>
+  <section class="services">
+    <h2>Zone de service</h2>
+    <p class="service-area">Ville de Soissons et alentours</p>
+    <ul class="services-list">
+      <li>🚑 Transport médicalisé assis</li>
+      <li>📄 Conventionné sécurité sociale</li>
+      <li>🏥 Transports vers hôpitaux et cliniques</li>
+      <li>📍 Courses locales et longues distances</li>
+      <li>⏱️ Ponctualité et fiabilité</li>
+      <li>👨‍👩‍👧‍👦 Accompagnement personnalisé</li>
+    </ul>
+  </section>
+
+  <section class="reservation">
+    <h2>Réserver un trajet</h2>
+    <p style="text-align: center; margin-bottom: 25px;">Réservez votre taxi en remplissant ce formulaire. Nous vous contacterons pour confirmer.</p>
+    
+    <form class="reservation-form" id="reservationForm">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="name">Nom complet *</label>
+          <input type="text" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+          <label for="phone">Téléphone *</label>
+          <input type="tel" id="phone" name="phone" required>
+        </div>
+      </div>
+      
+      <div class="form-row">
+        <div class="form-group">
+          <label for="date">Date souhaitée *</label>
+          <input type="date" id="date" name="date" required>
+        </div>
+        <div class="form-group">
+          <label for="time">Heure souhaitée *</label>
+          <input type="time" id="time" name="time" required>
+        </div>
+      </div>
+      
+      <div class="form-row">
+        <div class="form-group">
+          <label for="pickup">Lieu de prise en charge *</label>
+          <input type="text" id="pickup" name="pickup" placeholder="Adresse complète" required>
+        </div>
+        <div class="form-group">
+          <label for="destination">Destination *</label>
+          <input type="text" id="destination" name="destination" placeholder="Adresse complète" required>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="passengers">Nombre de passagers</label>
+        <select id="passengers" name="passengers">
+          <option value="1">1 passager</option>
+          <option value="2">2 passagers</option>
+          <option value="3">3 passagers</option>
+          <option value="4">4 passagers ou plus</option>
+        </select>
+      </div>
+      
+      <div class="form-group">
+        <label for="message">Informations supplémentaires</label>
+        <textarea id="message" name="message" placeholder="Besoin d'assistance particulière, bagages, etc."></textarea>
+      </div>
+      
+      <button type="submit" class="btn-submit">
+        💬 Réserver via WhatsApp
+      </button>
+    </form>
+  </section>
+
+  <section class="buttons">
+    <a class="btn" href="tel:+33663212046">📞 Appeler maintenant</a>
+    <a class="btn" href="https://wa.me/33663212046" target="_blank" rel="noopener">💬 WhatsApp direct</a>
+    <a class="btn" href="mailto:taximounir02@gmail.com">📧 Envoyer un email</a>
+    <a class="btn" href="taximounir.vcf" download>📇 Ajouter aux contacts</a>
+    <a class="btn" href="https://www.google.com/maps/search/Soissons" target="_blank" rel="noopener">📍 Me localiser</a>
+  </section>
+
+  <section class="testimonials">
+    <h2>Témoignages clients</h2>
+    <div class="testimonial-container">
+      <div class="testimonial">
+        <p>"Service impeccable et ponctuel. Mounir est très attentionné avec les personnes âgées."</p>
+        <div class="author">
+          <div>
+            <strong>Marie D.</strong>
+            <div class="stars">★★★★★</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial">
+        <p>"Toujours à l'heure pour mes rendez-vous à l'hôpital. Je recommande vivement !"</p>
+        <div class="author">
+          <div>
+            <strong>Pierre L.</strong>
+            <div class="stars">★★★★★</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial">
+        <p>"Conducteur professionnel et véhicule très propre. Tarifs raisonnables."</p>
+        <div class="author">
+          <div>
+            <strong>Sophie M.</strong>
+            <div class="stars">★★★★☆</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="footer-phone">
+    📞 <a href="tel:+33663212046" style="color: #000; text-decoration: none;">06 63 21 20 46</a>
+  </div>
+  <p>© 2025 Taxi Mounir - Tous droits réservés</p>
+  <p>Transport médicalisé conventionné - Soissons et alentours</p>
+</footer>
+
+<script>
+  document.getElementById('reservationForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // Récupérer les valeurs du formulaire
+    const name = document.getElementById('name').value;
+    const phone = document.getElementById('phone').value;
+    const date = document.getElementById('date').value;
+    const time = document.getElementById('time').value;
+    const pickup = document.getElementById('pickup').value;
+    const destination = document.getElementById('destination').value;
+    const passengers = document.getElementById('passengers').value;
+    const message = document.getElementById('message').value;
+    
+    // Formater la date en français
+    const dateObj = new Date(date);
+    const formattedDate = dateObj.toLocaleDateString('fr-FR', {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+    
+    // Créer le message pour WhatsApp
+    const whatsappMessage = `Bonjour, je souhaite réserver un taxi pour le ${formattedDate} à ${time}.
+    
+Détails de la réservation:
+- Nom: ${name}
+- Téléphone: ${phone}
+- Prise en charge: ${pickup}
+- Destination: ${destination}
+- Nombre de passagers: ${passengers}
+${message ? `- Informations: ${message}` : ''}
+
+Merci de me confirmer cette réservation.`;
+    
+    // Encoder le message pour l'URL
+    const encodedMessage = encodeURIComponent(whatsappMessage);
+    
+    // Rediriger vers WhatsApp
+    window.open(`https://wa.me/33663212046?text=${encodedMessage}`, '_blank');
+  });
+  
+  // Définir la date minimale pour le champ date (aujourd'hui)
+  const today = new Date().toISOString().split('T')[0];
+  document.getElementById('date').min = today;
+</script>
+
 </body>
 </html>
